@@ -1,0 +1,8 @@
+[DATE]
+Version="1.0.0"
+
+[GESTION]
+LastVersion="11.1.572"
+Destinos="s:\wsgc,c:\wsgc,c:\sistema\wsgc,t:\wsgc"
+download="gestion.rar"
+extractTo="gestion.exe"
