@@ -3,6 +3,6 @@ Version="1.0.0"
 
 [GESTION]
 LastVersion="11.1.573"
-Destinos="s:\wsgc,c:\wsgc,c:\sistema\wsgc,t:\wsgc"
+Destinos="c:\wsgc,s:\wsgc,c:\sistema\wsgc,t:\wsgc"
 download="gestion.rar"
 extractTo="gestion.exe"
