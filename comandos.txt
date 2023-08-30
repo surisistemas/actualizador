@@ -6,3 +6,9 @@ LastVersion=11.1.597
 Destinos="c:\wsgc,s:\wsgc,c:\sistema\wsgc,t:\wsgc"
 download="gestion.rar"
 extractTo="gestion.exe"
+
+[INTERFASESURI]
+LastVersion=1.0.0.22
+Destinos="C:\Program Files (x86)\Suri Sistemas S.R.L\Suri Connect"
+download="InterfaseSuri.zip"
+extractTo="*"
