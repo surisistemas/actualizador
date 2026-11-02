@@ -1,0 +1,622 @@
+[
+  {
+    "version": 1,
+    "descripcion": "Schema base — punto de partida",
+    "sql": []
+  },
+  {
+    "version": 2,
+    "descripcion": "Ampliar dolar DECIMAL(10,4) en AF, AFD, contable, rem, rem_d + plazo VARCHAR(20) en AF",
+    "sql": [
+      "ALTER TABLE `af`       MODIFY COLUMN `dolar` DECIMAL(10,4)",
+      "ALTER TABLE `afd`      MODIFY COLUMN `dolar` DECIMAL(10,4)",
+      "ALTER TABLE `contable` MODIFY COLUMN `dolar` DECIMAL(10,4)",
+      "ALTER TABLE `rem`      MODIFY COLUMN `dolar` DECIMAL(10,4)",
+      "ALTER TABLE `rem_d`    MODIFY COLUMN `dolar` DECIMAL(10,4)",
+      "ALTER TABLE `af`       MODIFY COLUMN `plazo` VARCHAR(20)"
+    ]
+  },
+  {
+    "version": 3,
+    "descripcion": "Ampliar dolar DECIMAL(10,4) en mov_caja",
+    "sql": [
+      "ALTER TABLE `mov_caja` MODIFY COLUMN `dolar` DECIMAL(10,4)"
+    ]
+  },
+  {
+    "version": 4,
+    "descripcion": "Corregir ib_porc_921 e ib_porc_917 a DECIMAL(5,2) en acl",
+    "sql": [
+      "ALTER TABLE `acl` MODIFY COLUMN `ib_porc_921` DECIMAL(5,2) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `acl` MODIFY COLUMN `ib_porc_917` DECIMAL(5,2) NOT NULL DEFAULT '0'"
+    ]
+  },
+  {
+    "version": 5,
+    "descripcion": "Agregar codfact, ptovta, nro, codigo en tarje, mov_caja, bancos, cheques",
+    "sql": [
+      "ALTER TABLE `tarje`    ADD COLUMN `codfact` DECIMAL(3,0) NULL",
+      "ALTER TABLE `tarje`    ADD COLUMN `ptovta`  DECIMAL(5,0) NULL",
+      "ALTER TABLE `tarje`    ADD COLUMN `nro`     DECIMAL(8,0) NULL",
+      "ALTER TABLE `tarje`    ADD COLUMN `codigo`  VARCHAR(4)   NULL",
+      "ALTER TABLE `mov_caja` ADD COLUMN `codfact` DECIMAL(3,0) NULL",
+      "ALTER TABLE `mov_caja` ADD COLUMN `ptovta`  DECIMAL(5,0) NULL",
+      "ALTER TABLE `mov_caja` ADD COLUMN `nro`     DECIMAL(8,0) NULL",
+      "ALTER TABLE `mov_caja` ADD COLUMN `codigo`  VARCHAR(4)   NULL",
+      "ALTER TABLE `bancos`   ADD COLUMN `codfact` DECIMAL(3,0) NULL",
+      "ALTER TABLE `bancos`   ADD COLUMN `ptovta`  DECIMAL(5,0) NULL",
+      "ALTER TABLE `bancos`   ADD COLUMN `nro`     DECIMAL(8,0) NULL",
+      "ALTER TABLE `bancos`   ADD COLUMN `codigo`  VARCHAR(4)   NULL",
+      "ALTER TABLE `cheques`  ADD COLUMN `codfact` DECIMAL(3,0) NULL",
+      "ALTER TABLE `cheques`  ADD COLUMN `ptovta`  DECIMAL(5,0) NULL",
+      "ALTER TABLE `cheques`  ADD COLUMN `nro`     DECIMAL(8,0) NULL"
+    ]
+  },
+  {
+    "version": 6,
+    "descripcion": "Corregir dolar/plazo en ped, pre, ped_local + agregar fchange en ped, pre, ped_d, pre_d",
+    "sql": [
+      "ALTER TABLE `ped`       MODIFY COLUMN `dolar`   DECIMAL(10,4)",
+      "ALTER TABLE `ped`       MODIFY COLUMN `plazo`   VARCHAR(20)",
+      "ALTER TABLE `ped`       ADD    COLUMN `fchange`  DATETIME(3) NULL",
+      "ALTER TABLE `pre`       MODIFY COLUMN `dolar`   DECIMAL(10,4)",
+      "ALTER TABLE `pre`       MODIFY COLUMN `plazo`   VARCHAR(20)",
+      "ALTER TABLE `pre`       ADD    COLUMN `fchange`  DATETIME(3) NULL",
+      "ALTER TABLE `ped_local` MODIFY COLUMN `dolar`   DECIMAL(10,4)",
+      "ALTER TABLE `ped_local` MODIFY COLUMN `plazo`   VARCHAR(20)",
+      "ALTER TABLE `ped_d`     ADD    COLUMN `fchange`  DATETIME(3) NULL",
+      "ALTER TABLE `pre_d`     ADD    COLUMN `fchange`  DATETIME(3) NULL"
+    ]
+  },
+  {
+    "version": 7,
+    "descripcion": "Corregir dolar DECIMAL(10,4) en comision",
+    "sql": [
+      "ALTER TABLE `comision` MODIFY COLUMN `dolar` DECIMAL(10,4)"
+    ]
+  },
+  {
+    "version": 8,
+    "descripcion": "Ampliar form_nro a VARCHAR(15) en mov_caja, bancos, tarje",
+    "sql": [
+      "ALTER TABLE `mov_caja` MODIFY COLUMN `form_nro` VARCHAR(15)",
+      "ALTER TABLE `bancos`   MODIFY COLUMN `form_nro` VARCHAR(15)",
+      "ALTER TABLE `tarje`    MODIFY COLUMN `form_nro` VARCHAR(15)"
+    ]
+  },
+  {
+    "version": 9,
+    "descripcion": "Ampliar campos de precio a DECIMAL(15,4) en afd, stock, pre_d, ped_d, rem_d",
+    "sql": [
+      "ALTER TABLE `afd` MODIFY COLUMN `fprec` DECIMAL(15,4)",
+      "ALTER TABLE `afd` MODIFY COLUMN `f_pu` DECIMAL(15,4)",
+      "ALTER TABLE `afd` MODIFY COLUMN `f_lista` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `plp` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `pu` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista1` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista2` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista3` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista4` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista5` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista6` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista7` DECIMAL(15,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `lista8` DECIMAL(15,4)",
+      "ALTER TABLE `pre_d` MODIFY COLUMN `fprec` DECIMAL(15,4)",
+      "ALTER TABLE `ped_d` MODIFY COLUMN `fprec` DECIMAL(15,4)",
+      "ALTER TABLE `rem_d` MODIFY COLUMN `fprec` DECIMAL(15,4)"
+    ]
+  },
+  {
+    "version": 10,
+    "descripcion": "Agregar tablas rem, rem_d, numem, tarjetas + campos nuevos en numem y tarjetas",
+    "sql": [
+      "ALTER TABLE `numem` ADD COLUMN `nro_cuenta` VARCHAR(22) NULL",
+      "ALTER TABLE `numem` ADD COLUMN `cbu`        VARCHAR(22) NULL",
+      "ALTER TABLE `numem` ADD COLUMN `moneda`     VARCHAR(3)  NULL",
+      "ALTER TABLE `numem` ADD COLUMN `saldo_act`  DECIMAL(15,2) NULL",
+      "ALTER TABLE `numem` ADD COLUMN `activo`     TINYINT(1)  DEFAULT 1",
+      "ALTER TABLE `tarjetas` ADD COLUMN `plazo_acred` DECIMAL(3,0) NULL",
+      "ALTER TABLE `tarjetas` ADD COLUMN `comision`    DECIMAL(5,2) NULL",
+      "ALTER TABLE `tarjetas` ADD COLUMN `tipo`        VARCHAR(1)   NULL",
+      "ALTER TABLE `tarjetas` ADD COLUMN `red`         VARCHAR(10)  NULL",
+      "ALTER TABLE `tarjetas` ADD COLUMN `activo`      TINYINT(1)   DEFAULT 1"
+    ]
+  },
+  {
+    "version": 11,
+    "descripcion": "Módulo recibos moderno — tablas recibo_cab, recibo_aplica, recibo_cobro",
+    "sql": [
+      "-- Tablas nuevas creadas via schema (CREATE TABLE IF NOT EXISTS) — no requiere ALTER TABLE"
+    ]
+  },
+  {
+    "version": 12,
+    "descripcion": "Agregar campo wasap en acl",
+    "sql": [
+      "ALTER TABLE `acl` ADD COLUMN `wasap` VARCHAR(20) NULL"
+    ]
+  },
+  {
+    "version": 13,
+    "descripcion": "Agregar columnas de auditoría faltantes en acl, acl2, stock, depo_st, ctacte_d",
+    "sql": [
+      "ALTER TABLE `acl` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `acl` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `acl` ADD COLUMN `_eliminado_en` datetime(3) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `_uuid` char(36) NOT NULL DEFAULT ''",
+      "ALTER TABLE `acl` ADD COLUMN `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `acl` ADD COLUMN `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `acl` ADD COLUMN `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR'",
+      "ALTER TABLE `acl` ADD COLUMN `_sync_version` int NOT NULL DEFAULT '1'",
+      "ALTER TABLE `acl2` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `acl2` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `acl2` ADD COLUMN `_eliminado_en` datetime(3) DEFAULT NULL",
+      "ALTER TABLE `acl2` ADD COLUMN `_uuid` char(36) NOT NULL DEFAULT ''",
+      "ALTER TABLE `acl2` ADD COLUMN `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `acl2` ADD COLUMN `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `acl2` ADD COLUMN `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR'",
+      "ALTER TABLE `acl2` ADD COLUMN `_sync_version` int NOT NULL DEFAULT '1'",
+      "ALTER TABLE `stock` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `stock` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `stock` ADD COLUMN `_eliminado_en` datetime(3) DEFAULT NULL",
+      "ALTER TABLE `stock` ADD COLUMN `_uuid` char(36) NOT NULL DEFAULT ''",
+      "ALTER TABLE `stock` ADD COLUMN `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `stock` ADD COLUMN `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `stock` ADD COLUMN `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR'",
+      "ALTER TABLE `stock` ADD COLUMN `_sync_version` int NOT NULL DEFAULT '1'",
+      "ALTER TABLE `depo_st` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `depo_st` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `depo_st` ADD COLUMN `_eliminado_en` datetime(3) DEFAULT NULL",
+      "ALTER TABLE `depo_st` ADD COLUMN `_uuid` char(36) NOT NULL DEFAULT ''",
+      "ALTER TABLE `depo_st` ADD COLUMN `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `depo_st` ADD COLUMN `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `depo_st` ADD COLUMN `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR'",
+      "ALTER TABLE `depo_st` ADD COLUMN `_sync_version` int NOT NULL DEFAULT '1'",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_eliminado_en` datetime(3) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_uuid` char(36) NOT NULL DEFAULT ''",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR'",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `_sync_version` int NOT NULL DEFAULT '1'"
+    ]
+  },
+  {
+    "version": 14,
+    "descripcion": "Agregar PK _id a acl2 (tabla sin clave primaria)",
+    "sql": [
+      "ALTER TABLE `acl2` ADD COLUMN `_id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST"
+    ]
+  },
+  {
+    "version": 15,
+    "descripcion": "Ampliar np_oc en rem y oc_prov/remii en af",
+    "sql": [
+      "ALTER TABLE `rem` MODIFY COLUMN `np_oc`  VARCHAR(100)",
+      "ALTER TABLE `rem` MODIFY COLUMN `np_oc2` VARCHAR(100)",
+      "ALTER TABLE `af`  MODIFY COLUMN `oc_prov` VARCHAR(100)",
+      "ALTER TABLE `af`  MODIFY COLUMN `remii`   VARCHAR(100)"
+    ]
+  },
+  {
+    "version": 16,
+    "descripcion": "Permitir id_recibo NULL en recibo_cobro y recibo_aplica",
+    "sql": [
+      "ALTER TABLE `recibo_cobro`  MODIFY COLUMN `id_recibo` bigint DEFAULT NULL",
+      "ALTER TABLE `recibo_aplica` MODIFY COLUMN `id_recibo` bigint DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 17,
+    "descripcion": "Ampliar tipo a VARCHAR(5) en recibo_cab",
+    "sql": [
+      "ALTER TABLE `recibo_cab` MODIFY COLUMN `tipo` VARCHAR(5)"
+    ]
+  },
+  {
+    "version": 18,
+    "descripcion": "Ampliar fnfact a VARCHAR(30) en recibo_aplica",
+    "sql": [
+      "ALTER TABLE `recibo_aplica` MODIFY COLUMN `fnfact` VARCHAR(30)"
+    ]
+  },
+  {
+    "version": 19,
+    "descripcion": "Permitir identify NULL en ctacte_h",
+    "sql": [
+      "ALTER TABLE `ctacte_h` MODIFY COLUMN `identify` bigint DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 20,
+    "descripcion": "Ampliar obs y detalle en mstock",
+    "sql": [
+      "ALTER TABLE `mstock` MODIFY COLUMN `obs`     VARCHAR(100)",
+      "ALTER TABLE `mstock` MODIFY COLUMN `detalle` VARCHAR(100)"
+    ]
+  },
+  {
+    "version": 21,
+    "descripcion": "Crear tablas ped_web_pagos y ped_web_meta para cobros y metadatos de pedidos web",
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS `ped_web_pagos` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `id_ped` int NOT NULL,\n  `ml_order_id` varchar(50) DEFAULT NULL,\n  `payment_id` varchar(50) NOT NULL,\n  `origen` varchar(20) DEFAULT 'ML',\n  `forma_pago_cod` varchar(10) DEFAULT 'ML',\n  `metodo_pago` varchar(50) DEFAULT NULL,\n  `tarjeta_banco` varchar(50) DEFAULT NULL,\n  `cuotas` int DEFAULT 1,\n  `monto_bruto` decimal(12,2) NOT NULL,\n  `comision_pasarela` decimal(10,2) DEFAULT 0.00,\n  `impuestos_pasarela` decimal(10,2) DEFAULT 0.00,\n  `monto_neto` decimal(12,2) NOT NULL,\n  `estado_pago` varchar(20) DEFAULT 'approved',\n  `fecha_cobro` datetime DEFAULT NULL,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `idx_ped` (`id_ped`),\n  KEY `idx_payment` (`payment_id`),\n  KEY `idx_ml_order` (`ml_order_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+      "CREATE TABLE IF NOT EXISTS `ped_web_meta` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `id_ped` int NOT NULL,\n  `order_id` varchar(50) DEFAULT NULL,\n  `comprador_nickname` varchar(100) DEFAULT NULL,\n  `comprador_telefono` varchar(50) DEFAULT NULL,\n  `envio_calle` varchar(255) DEFAULT NULL,\n  `envio_cp` varchar(20) DEFAULT NULL,\n  `envio_localidad` varchar(100) DEFAULT NULL,\n  `envio_provincia` varchar(100) DEFAULT NULL,\n  `carrier_nombre` varchar(100) DEFAULT NULL,\n  `tracking_id` varchar(100) DEFAULT NULL,\n  `meta_key` varchar(50) DEFAULT NULL,\n  `meta_value` text DEFAULT NULL,\n  `raw_payload` json DEFAULT NULL,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `idx_ped` (`id_ped`),\n  KEY `idx_order` (`order_id`),\n  KEY `idx_key` (`meta_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    ]
+  },
+  {
+    "version": 22,
+    "descripcion": "Agregar columnas de tracking _sync_estado/_eliminado en ped_web_pagos y ped_web_meta (tablas DOWN — default 1 = ya sincronizado, no requiere subida)",
+    "sql": [
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '1'",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'",
+      "ALTER TABLE `ped_web_meta`  ADD COLUMN `_sync_estado` tinyint(1) NOT NULL DEFAULT '1'",
+      "ALTER TABLE `ped_web_meta`  ADD COLUMN `_eliminado`   tinyint(1) NOT NULL DEFAULT '0'"
+    ]
+  },
+  {
+    "version": 23,
+    "descripcion": "Ampliar fdesc a VARCHAR(255) en afd — descripciones largas de artículos",
+    "sql": [
+      "ALTER TABLE `afd` MODIFY COLUMN `fdesc` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 24,
+    "descripcion": "Ampliar detalle a VARCHAR(255) en mov_caja — nombres de clientes/proveedores largos",
+    "sql": [
+      "ALTER TABLE `mov_caja` MODIFY COLUMN `detalle` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 25,
+    "descripcion": "Crear tabla apr — saldos de cuentas corrientes de proveedores (acreedores)",
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS `apr` (\n  `codigo`     VARCHAR(10)    NOT NULL,\n  `saldo_cc`   DECIMAL(15,2)  NOT NULL DEFAULT 0.00,\n  `update_at`  DATETIME       NULL,\n  PRIMARY KEY (`codigo`),\n  INDEX `idx_codigo` (`codigo`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    ]
+  },
+  {
+    "version": 26,
+    "descripcion": "Corregir UNIQUE KEY en ped_d_local: (id_web) → (id_web, item) para soportar múltiples ítems por pedido",
+    "sql": [
+      "ALTER TABLE `ped_d_local` DROP INDEX `uk_id_web_det`",
+      "ALTER TABLE `ped_d_local` ADD UNIQUE KEY `uk_id_web_det` (`id_web`, `item`)"
+    ]
+  },
+  {
+    "version": 27,
+    "descripcion": "Fix ped_web_pagos: monto_neto nullable, UNIQUE KEY (id_ped, payment_id)",
+    "sql": [
+      "ALTER TABLE `ped_web_pagos` MODIFY COLUMN `monto_neto` DECIMAL(12,2) NULL DEFAULT 0.00",
+      "ALTER TABLE `ped_web_pagos` MODIFY COLUMN `monto_bruto` DECIMAL(12,2) NULL DEFAULT 0.00",
+      "ALTER TABLE `ped_web_pagos` ADD UNIQUE KEY `uk_ped_payment` (`id_ped`, `payment_id`)"
+    ]
+  },
+  {
+    "version": 28,
+    "descripcion": "Agregar migrado y update_at en ped_local para UP sync de pedidos",
+    "sql": [
+      "ALTER TABLE `ped_local` ADD COLUMN `migrado`   INT      NULL DEFAULT 0",
+      "ALTER TABLE `ped_local` ADD COLUMN `update_at` DATETIME NULL"
+    ]
+  },
+  {
+    "version": 29,
+    "descripcion": "Agregar columnas de auditoria en ctacte_h (_sync_estado, _eliminado, update_at)",
+    "sql": [
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_sync_estado`   tinyint(1)   NOT NULL DEFAULT '0'",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_eliminado`     tinyint(1)   NOT NULL DEFAULT '0'",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_eliminado_en`  datetime(3)  DEFAULT NULL",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `update_at`      datetime     NULL",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_uuid`          char(36)     NOT NULL DEFAULT ''",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_modificado_en` datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `_origen`        varchar(20)  NOT NULL DEFAULT 'MIGRADOR'"
+    ]
+  },
+  {
+    "version": 30,
+    "descripcion": "Ampliar columnas de texto en af — locali/direc/nombre a 100, remii/oc_prov a 200",
+    "sql": [
+      "ALTER TABLE `af` MODIFY COLUMN `locali`  VARCHAR(100)",
+      "ALTER TABLE `af` MODIFY COLUMN `direc`   VARCHAR(100)",
+      "ALTER TABLE `af` MODIFY COLUMN `nombre`  VARCHAR(100)",
+      "ALTER TABLE `af`     MODIFY COLUMN `remii`   VARCHAR(200)",
+      "ALTER TABLE `af`     MODIFY COLUMN `oc_prov` VARCHAR(200)",
+      "ALTER TABLE `mstock` MODIFY COLUMN `motivo`  VARCHAR(20)"
+    ]
+  },
+  {
+    "version": 31,
+    "descripcion": "Agregar reib_924 y p_reib_924 en af — jurisdicción IB 924 (estaban en schema.sql pero faltaba la migración)",
+    "sql": [
+      "ALTER TABLE `af` ADD COLUMN `reib_924`   DECIMAL(12,2) NULL DEFAULT NULL AFTER `p_reib_914`",
+      "ALTER TABLE `af` ADD COLUMN `p_reib_924` DECIMAL(6,2)  NULL DEFAULT NULL AFTER `reib_924`"
+    ]
+  },
+  {
+    "version": 32,
+    "descripcion": "Agregar columnas faltantes en rem/rem_d (nunca creadas por el migrador base) + uniformar anchos de texto (fdesc/nombre/obs) entre af/ped/pre/rem para evitar el mismo incidente de truncamiento que tuvimos en afd.fdesc",
+    "sql": [
+      "ALTER TABLE `rem` ADD COLUMN `cuit`      VARCHAR(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `pos`       VARCHAR(2)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `cod_vend`  VARCHAR(4)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `cod_zona`  VARCHAR(4)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `np_oc`     VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `np_oc2`    VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `valor`     DECIMAL(12,2) DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `cod_trans` VARCHAR(4)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `pendi`     VARCHAR(1)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `pesot`     DECIMAL(8,3) DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `bultos`    DECIMAL(8,0) DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `precrd`    DECIMAL(1,0) DEFAULT NULL",
+      "ALTER TABLE `rem` ADD COLUMN `obs`       VARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `menos`        DECIMAL(6,0) DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `texva`        VARCHAR(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `texva2`       VARCHAR(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `pendi`        VARCHAR(1)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `pais`         VARCHAR(3)  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `rem_d` ADD COLUMN `nro_despacho` VARCHAR(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL",
+      "ALTER TABLE `ped_d` MODIFY COLUMN `fdesc` VARCHAR(255)",
+      "ALTER TABLE `pre_d` MODIFY COLUMN `fdesc` VARCHAR(255)",
+      "ALTER TABLE `rem_d` MODIFY COLUMN `fdesc` VARCHAR(255)",
+      "ALTER TABLE `af`  MODIFY COLUMN `nombre` VARCHAR(150)",
+      "ALTER TABLE `ped` MODIFY COLUMN `nombre` VARCHAR(150)",
+      "ALTER TABLE `pre` MODIFY COLUMN `nombre` VARCHAR(150)",
+      "ALTER TABLE `mstock`  MODIFY COLUMN `obs`    VARCHAR(150)",
+      "ALTER TABLE `af_obs`  MODIFY COLUMN `obs`    VARCHAR(150)",
+      "ALTER TABLE `stock`   MODIFY COLUMN `st_obs` VARCHAR(150)",
+      "ALTER TABLE `rem`     MODIFY COLUMN `obs`    VARCHAR(150)"
+    ]
+  },
+  {
+    "version": 33,
+    "descripcion": "Portar a migrations.json lo que hacia el boton VerificaMysql (db_update_improved.prg): columnas de ACL/STOCK/CTACTE_D/CTACTE_H, tablas metodos_pago/mail_logs y el procedimiento ObtenerDatos (usado por comparativaprecios). Se reemplaza el boton para que llame solo a AplicarMigraciones().",
+    "sql": [
+      "ALTER TABLE `acl` ADD COLUMN `cod_vend2` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `cod_vend2` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `IB_PORC_924` DECIMAL(16,4) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `IB_PORC_924` DECIMAL(16,4) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `C_MIN` DECIMAL(16,4) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `C_MIN` DECIMAL(16,4) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `IB_EXEN_924` BIT(1) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `IB_EXEN_924` BIT(1) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `w_user` CHAR(50) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `w_user` CHAR(50) DEFAULT NULL",
+      "ALTER TABLE `acl` ADD COLUMN `id_acl` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `acl` MODIFY COLUMN `id_acl` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `stock` ADD COLUMN `QI` DECIMAL(20,6) DEFAULT NULL",
+      "ALTER TABLE `stock` MODIFY COLUMN `QI` DECIMAL(20,6) DEFAULT NULL",
+      "ALTER TABLE `stock` MODIFY COLUMN `PU` DECIMAL(16,4) DEFAULT NULL",
+      "ALTER TABLE `stock` ADD COLUMN `Desc_Fin` DECIMAL(4,2) DEFAULT NULL",
+      "ALTER TABLE `stock` MODIFY COLUMN `Desc_Fin` DECIMAL(4,2) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `DOLAR` DECIMAL(20,4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` MODIFY COLUMN `DOLAR` DECIMAL(20,4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `cod_vend2` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` MODIFY COLUMN `cod_vend2` CHAR(4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` ADD COLUMN `COMI_REG2` DECIMAL(12,4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_d` MODIFY COLUMN `COMI_REG2` DECIMAL(12,4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_h` ADD COLUMN `DOLAR` DECIMAL(12,4) DEFAULT NULL",
+      "ALTER TABLE `ctacte_h` MODIFY COLUMN `DOLAR` DECIMAL(12,4) DEFAULT NULL",
+      "CREATE TABLE IF NOT EXISTS metodos_pago (id_metodo_pago INT AUTO_INCREMENT PRIMARY KEY, descripcion VARCHAR(50) NOT NULL, activo BIT(1) DEFAULT 1, fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP, KEY idx_activo (activo)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+      "CREATE TABLE IF NOT EXISTS mail_logs (id BIGINT AUTO_INCREMENT PRIMARY KEY, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, status VARCHAR(16) NOT NULL, error_msg TEXT NULL, mail_from VARCHAR(255) NULL, mail_to TEXT NULL, mail_cc TEXT NULL, mail_bcc TEXT NULL, subject VARCHAR(512) NULL, body LONGTEXT NULL, attachments TEXT NULL, smtp_server VARCHAR(255) NULL, smtp_port INT NOT NULL DEFAULT 0, smtp_ssl TINYINT(1) NOT NULL DEFAULT 0, duration_ms INT NOT NULL DEFAULT 0, KEY idx_created (created_at), KEY idx_status (status)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+      "DROP PROCEDURE IF EXISTS `ObtenerDatos`",
+      "CREATE PROCEDURE `ObtenerDatos`()\nBEGIN\n    SELECT \n        b.codigo AS cod_modelo, \n        b.nombre AS Modelo, \n        c.id_stock AS cod, \n        s.mat,\n        s.marca,\n        s.moneda,\n        s.plp AS PLP,\n        s.por_prov AS Desc1, \n        s.por_prov2 AS desc2,\n        s.por_prov3 AS Desc3, \n        s.por_prov4 AS desc4,\n        s.pu AS Costo,\n        s.lista1 AS Lista1,\n        s.lista2 AS Lista2,\n        s.lista3 AS Lista3,\n        s.lista4 AS Lista4,\n        s.lista5 AS Lista5,\n        s.lista6 AS Lista6,\n        s.lista7 AS Lista7,\n        s.lista8 AS Lista8\n    FROM \n        modelos_codigos c\n    INNER JOIN \n        modelos b ON c.id_modelo = b.codigo COLLATE utf8_unicode_ci\n    INNER JOIN \n        stock s ON s.cod = c.id_stock COLLATE utf8_unicode_ci\n    ORDER BY \n        b.codigo, s.lista1\n;\nEND"
+    ]
+  },
+  {
+    "version": 34,
+    "descripcion": "Crear tabla contable si no existe (algunos clientes nunca la tuvieron - graba_mysql_contable fallaba con Table doesnt exist)",
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS `contable` (`fecha` date DEFAULT NULL, `c_debe` varchar(8) DEFAULT NULL, `c_haber` varchar(8) DEFAULT NULL, `importe` decimal(15,2) DEFAULT NULL, `detalle` varchar(60) DEFAULT NULL, `moneda` varchar(3) DEFAULT NULL, `dolar` decimal(10,4) DEFAULT NULL, `form_tipo` varchar(3) DEFAULT NULL, `form_nro` varchar(14) DEFAULT NULL, `transfe` varchar(1) DEFAULT NULL, `asi` varchar(1) DEFAULT NULL, `pass` varchar(4) DEFAULT NULL, `sucursal` varchar(4) DEFAULT NULL, `_id` bigint NOT NULL AUTO_INCREMENT, `_uuid` char(36) NOT NULL DEFAULT '', `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3), `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3), `_sincronizado_en` datetime(3) DEFAULT NULL, `_sync_estado` tinyint(1) NOT NULL DEFAULT '0', `_sync_version` int NOT NULL DEFAULT '1', `_origen` varchar(20) NOT NULL DEFAULT 'MIGRADOR', `_eliminado` tinyint(1) NOT NULL DEFAULT '0', `_eliminado_en` datetime(3) DEFAULT NULL, `_hash` char(32) DEFAULT NULL, `_api_id` varchar(100) DEFAULT NULL, `update_at` datetime DEFAULT NULL, `syncro_at` datetime DEFAULT NULL, `deleted_at` datetime DEFAULT NULL, PRIMARY KEY (`_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    ]
+  },
+  {
+    "version": 35,
+    "descripcion": "Agregar campo tipo a numem (BANCO/BILLETERA) - carga de billeteras se hace a mano desde el formulario de bancos",
+    "sql": [
+      "ALTER TABLE `numem` ADD COLUMN `tipo` VARCHAR(12) DEFAULT NULL",
+      "UPDATE `numem` SET `tipo` = 'BILLETERA' WHERE `tipo` IS NULL AND UPPER(TRIM(banco)) IN ('MERCADO PAGO','MODO','UALA','NARANJA X','PERSONAL PAY','CUENTA DNI')",
+      "UPDATE `numem` SET `tipo` = 'BANCO' WHERE `tipo` IS NULL"
+    ]
+  },
+  {
+    "version": 36,
+    "descripcion": "Ampliar comision.saldo de decimal(10,2) a decimal(15,2) - el acumulado por vendedor puede superar 9.999.999,99 en clientes de mucho volumen (Error 39 Desbordamiento numerico del lado VFP)",
+    "sql": [
+      "ALTER TABLE `comision` MODIFY COLUMN `saldo` decimal(15,2) DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 37,
+    "descripcion": "Ampliar afd.fcant de decimal(9,2) a decimal(12,2) - el cursor afp (oc.SCT y otros) permite cantidades mayores y afd debe poder recibirlas sin desbordar (Error 39 en OC_DETALLE.txtcant)",
+    "sql": [
+      "ALTER TABLE `afd` MODIFY COLUMN `fcant` decimal(12,2) DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 38,
+    "descripcion": "Agregar propio a recibo_cobro - distingue cheques propios de terceros para analisis de credito. titular/cuit_doc/fecha_vto/cod_bco ya existian sin usarse, se empiezan a llenar desde graba_mysql_recibo_cobro sin cambiar la firma para los demas medios de pago",
+    "sql": [
+      "ALTER TABLE `recibo_cobro` ADD COLUMN `propio` tinyint(1) DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 39,
+    "descripcion": "Ampliar rem.np_oc y rem.np_oc2 de VARCHAR(100) (migracion 15) a VARCHAR(255) - son listas de numeros de OC concatenados con espacios que pueden superar los 100 caracteres en remitos con muchas ordenes de compra (MYSQL_ERR 1526 Data too long for column np_oc2)",
+    "sql": [
+      "ALTER TABLE `rem` MODIFY COLUMN `np_oc`  VARCHAR(255)",
+      "ALTER TABLE `rem` MODIFY COLUMN `np_oc2` VARCHAR(255)"
+    ]
+  },
+  {
+    "version": 40,
+    "descripcion": "Agregar indices en identify/codigo para ctacte_d y ctacte_h - hoy solo tienen PK en _id, y funciones.prg hace UPDATE ... WHERE identify=X por cada fila de saldo (full table scan). sincro_saldos_ctacte.prg ya los crea al vuelo (idx_sincro_*) cuando se ejecuta ese script puntual, pero el camino de escritura diario no depende de eso, asi que se agregan de forma permanente aca. Mismos nombres que sincro_saldos_ctacte.prg para evitar duplicados en las bases donde ya se corrio ese script (si ya existen, esta migracion tira 'Duplicate key name' en ese paso puntual y sigue de largo sin bloquear el resto)",
+    "sql": [
+      "CREATE INDEX idx_sincro_identify ON ctacte_d (identify)",
+      "CREATE INDEX idx_sincro_codigo ON ctacte_d (codigo)",
+      "CREATE INDEX idx_sincro_fo_deleted ON ctacte_d (fo, deleted_at)",
+      "CREATE INDEX idx_sincro_identify ON ctacte_h (identify)"
+    ]
+  },
+  {
+    "version": 41,
+    "descripcion": "Ampliar afd.fcant, ctacte_h.dolar, ctacte_d.comi_reg2 y stock.desc_fin al maximo entre lo que ya tenia la base de Gallucci (ensanchada a mano, sin migracion) y lo que pedian las migraciones 33/37 - se detecto al correr 'Verificar integridad' en Gallucci: el schema.json (reconstruido fielmente desde el historial de migraciones) queria achicar estas 4 columnas por debajo de lo que la base ya tenia en produccion, con riesgo real de truncar datos. Se agranda para todos los clientes asi ningun otro pasa por lo mismo",
+    "sql": [
+      "ALTER TABLE `afd` MODIFY COLUMN `fcant` DECIMAL(13,3)",
+      "ALTER TABLE `ctacte_h` MODIFY COLUMN `dolar` DECIMAL(15,4)",
+      "ALTER TABLE `ctacte_d` MODIFY COLUMN `comi_reg2` DECIMAL(14,4)",
+      "ALTER TABLE `stock` MODIFY COLUMN `desc_fin` DECIMAL(6,2)"
+    ]
+  },
+  {
+    "version": 42,
+    "descripcion": "ped_web_pagos: desglose financiero de Mercado Pago y campos de conciliacion con el ERP. Espeja la migracion v42 que ya se aplico en la nube (backend). payment_id pasa a NULL-able porque solo se completa cuando Mercado Pago devuelve el id real de cobro (11-13 digitos); antes el backend ponia ahi el numero de orden de ML (16 digitos), que no sirve para conciliar contra el extracto. conciliado/fnfact/cod_bco/fec_concil los escribe FoxPro al grabar la factura (new_facturador.cobro_web_prefill + graba), el sincronizador nunca los toca. Si alguna columna ya existe, ese paso tira 'Duplicate column name' y sigue de largo",
+    "sql": [
+      "ALTER TABLE `ped_web_pagos` MODIFY COLUMN `payment_id` VARCHAR(50) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `pack_id` VARCHAR(50) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `costo_envio` DECIMAL(12,2) NOT NULL DEFAULT 0.00",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `date_approved` DATETIME NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `money_release_date` DATETIME NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `monto_devuelto` DECIMAL(12,2) NOT NULL DEFAULT 0.00",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `estado_detalle` VARCHAR(50) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `conciliado` TINYINT NOT NULL DEFAULT 0",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `fnfact` VARCHAR(20) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `cod_bco` VARCHAR(2) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_web_pagos` ADD COLUMN `fec_concil` DATETIME NULL DEFAULT NULL",
+      "CREATE INDEX idx_pwp_conciliado ON ped_web_pagos (id_ped, conciliado)"
+    ]
+  },
+  {
+    "version": 43,
+    "descripcion": "ped_local: datos de la factura con la que se cerro el pedido web. Hasta ahora new_facturador solo actualizaba cod_estado ('03' pendiente / '04' facturado) y el numero de comprobante no salia del ERP, asi que del lado de Suri no habia forma de linkear el pedido con su factura y todos figuraban 'Sin facturar'. FoxPro completa estos campos al grabar la factura y el sincronizador los sube a ped_web. fact_nro va con punto de venta y guion (ej. 0012-00068725), por eso VARCHAR y no INT",
+    "sql": [
+      "ALTER TABLE `ped_local` ADD COLUMN `fact_nro` VARCHAR(20) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_local` ADD COLUMN `fact_tipo` VARCHAR(3) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_local` ADD COLUMN `fact_letra` VARCHAR(1) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_local` ADD COLUMN `fact_fecha` DATETIME NULL DEFAULT NULL",
+      "ALTER TABLE `ped_local` ADD COLUMN `fact_cae` VARCHAR(20) NULL DEFAULT NULL",
+      "CREATE INDEX idx_ped_local_fact_nro ON ped_local (fact_nro)"
+    ]
+  },
+  {
+    "version": 44,
+    "descripcion": "Indices que nunca se crearon: la tabla stock se define en schema.json sin ninguna clave (ni primary key ni indices), asi que todo WHERE cod = ... hace scan completo. Con el ERP escribiendo por GuardarMySql y el sincronizador leyendo al mismo tiempo, InnoDB bloquea casi toda la tabla y salta deadlock (1213); se detecto al comparar stock DBF contra MySQL en Gallucci. Lo mismo en ped_d_local, que solo tiene idx_fcod y se consulta siempre por id_ped_local o id_web. Agregar un indice en InnoDB es online: no bloquea lecturas ni escrituras. Si el indice ya existe, ese paso tira 'Duplicate key name' y sigue de largo, igual que las columnas de la v42",
+    "sql": [
+      "CREATE INDEX idx_stock_cod ON stock (cod)",
+      "CREATE INDEX idx_pdl_ped ON ped_d_local (id_ped_local)",
+      "CREATE INDEX idx_pdl_web ON ped_d_local (id_web)"
+    ]
+  },
+  {
+    "version": 45,
+    "descripcion": "Indice de sincronizacion en las 32 tablas que no lo tienen. El sincronizador consulta siempre por _sync_estado y _eliminado (SELECT * FROM <tabla> WHERE _eliminado = 1 AND _sync_estado = 0 ORDER BY _id LIMIT 5000), pero de las 33 tablas que tienen esas columnas solo ped_local tenia indice. EXPLAIN en Gallucci devuelve possible_keys NULL y key PRIMARY: MySQL recorre la tabla entera en orden de _id para descubrir que no hay nada que sincronizar, y lo repite en cada pasada y en cada tabla. Con contable y ctacte_d cargadas eso deja el disco ocupado de forma permanente; se detecto porque un cliente tardaba 50 segundos (innodb_lock_wait_timeout) por cada UPDATE de saldo al hacer un remito. El indice va (_sync_estado, _eliminado) y no al reves para que sirva tambien a las consultas que filtran solo por _sync_estado; en InnoDB el indice secundario ya termina en la primary key, asi que resuelve el ORDER BY _id sin agregar la columna. Crear un indice en InnoDB es online: no bloquea lecturas ni escrituras. Si el indice ya existe, ese paso tira 'Duplicate key name' y sigue de largo, igual que la v42 y la v44",
+    "sql": [
+      "CREATE INDEX idx_sync ON acl (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON acl2 (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON af (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON af_cobros (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON af_obs (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON afd (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON bancos (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON cheques (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON comision (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON contable (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ctacte_d (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ctacte_h (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON da_configuraciones (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON depo_st (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON marca (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON monedas (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON mov_caja (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON mstock (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ncompro (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON numem (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ped (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ped_d (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ped_web_meta (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON ped_web_pagos (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON pre (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON pre_d (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON rem (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON rem_d (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON stock (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON tarje (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON tarjetas (_sync_estado, _eliminado)",
+      "CREATE INDEX idx_sync ON vendedor (_sync_estado, _eliminado)"
+    ]
+  },
+  {
+    "version": 46,
+    "descripcion": "Estado del CAE en af. Cuando ARCA no responde, el facturador graba la factura y recien despues pide el CAE: el COMMIT de la transaccion ocurre antes de llamar a Factura_Electronica. Si vuelve sin CAE, el bloque IF Not Empty(m.ObjResp.Cae) se saltea entero y no pasa nada: la factura queda comprometida sin CAE, sin log y sin nada que la distinga de una valida. Se detecto el 29/09 en un cliente donde ARCA no contestaba. cae_estado da ese estado: 0=pendiente (grabada sin CAE, no se imprime ni se entrega), 1=autorizada, 2=rechazada por ARCA. El default es 1 y no 0 a proposito: las facturas que ya existen estan autorizadas y no hay que reclasificarlas. Sigue la convencion de _pdf_estado, que ya usa tinyint con estados en la misma tabla. El indice es para el proceso que barre las pendientes; si ya existe, ese paso tira 'Duplicate key name' (1061) y sigue de largo, igual que la v45.",
+    "sql": [
+      "ALTER TABLE `af` ADD COLUMN `cae_estado` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '0=pendiente 1=autorizada 2=rechazada'",
+      "ALTER TABLE `af` ADD COLUMN `cae_motivo` VARCHAR(250) NULL DEFAULT NULL COMMENT 'Motivo del rechazo o de la pendencia, para revision manual'",
+      "ALTER TABLE `af` ADD COLUMN `cae_intentos` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Veces que el proceso de completado consulto a ARCA por esta factura'",
+      "CREATE INDEX `idx_cae_estado` ON `af` (`cae_estado`)"
+    ]
+  },
+  {
+    "version": 47,
+    "descripcion": "Crear perc_ret en MySQL. La tabla nunca existio: no estaba en schema.json, ni en schema.sql, ni en ninguna de las 46 migraciones anteriores. Pero graba_mysql_perc_ret() en mysql_facturacion.prg hace un INSERT INTO perc_ret y el facturador la llama desde siete lugares, uno por cada tipo de percepcion o retencion. O sea que toda percepcion y toda retencion se grababa en el DBF y el INSERT a MySQL moria con 1146 Table doesn't exist, sin que nada lo frenara: queda una linea en Audita y listo. Se detecto el 30/09 al cruzar las 21 tablas en las que el ERP escribe contra las 46 de schema.json: perc_ret era la unica que faltaba. Estructura derivada del LIST STRUCTURE del DBF del cliente (15 campos) mas las columnas de control que llevan todas las demas. idx_sync tiene el mismo nombre y composicion que puso la v45 en las otras 32, para que una tabla creada por el migrador y una creada por esta migracion queden identicas. Si la tabla ya existe, IF NOT EXISTS no hace nada; si los indices ya existen, el paso tira 1061 y sigue de largo.",
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS `perc_ret` ( `fecha` date DEFAULT NULL, `importe` decimal(10,2) DEFAULT NULL, `estado` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `ncomprob` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `codigo` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `fechaliq` date DEFAULT NULL, `valor` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `provi` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `f_tipo_i` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `f_nro_i` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `f_tipo_e` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `f_nro_e` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `cuit` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `alicuota` decimal(5,2) DEFAULT NULL, `codfact` decimal(3,0) DEFAULT NULL, `_id` bigint NOT NULL AUTO_INCREMENT, `_uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT (uuid()), `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3), `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3), `_sincronizado_en` datetime(3) DEFAULT NULL, `_sync_estado` tinyint(1) NOT NULL DEFAULT '0', `_sync_version` int NOT NULL DEFAULT '1', `_origen` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'MIGRADOR', `_eliminado` tinyint(1) NOT NULL DEFAULT '0', `_eliminado_en` datetime(3) DEFAULT NULL, `_hash` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `_api_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL, `update_at` datetime DEFAULT NULL, `syncro_at` datetime DEFAULT NULL, `deleted_at` datetime DEFAULT NULL, PRIMARY KEY (`_id`), KEY `idx_ncomprob` (`ncomprob`), KEY `idx_sync` (`_sync_estado`,`_eliminado`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    ]
+  },
+  {
+    "version": 48,
+    "descripcion": "Unificar la collation de las siete tablas que quedaron en utf8mb4_0900_ai_ci mientras las otras cuarenta estan en utf8mb4_unicode_ci. En MySQL 8 eso rompe cualquier JOIN entre unas y otras: SELECT ... FROM obras_facturas o JOIN af a ON o.fnfact = a.fnfact devuelve 1267 Illegal mix of collations (utf8mb4_0900_ai_ci,IMPLICIT) and (utf8mb4_unicode_ci,IMPLICIT) for operation '='. Verificado en MySQL 8.0.46. Lo mismo le espera a relacion_comprobantes, cuyas columnas tipo_doc y cpte_relacion existen justamente para relacionar comprobantes con af. El migrador no tiene nada que ver: siempre emite CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci explicito. Estas siete definiciones se pegaron en schema.json copiadas de un SHOW CREATE TABLE de un servidor MySQL 8, donde el default del servidor es utf8mb4_0900_ai_ci: se ve porque no tienen CHARACTER SET por columna, ni las columnas de control (_uuid, _sync_estado), ni idx_sync, a diferencia de las que genera el migrador. CONVERT TO reconstruye la tabla con el algoritmo COPY y bloquea las escrituras mientras corre, asi que en auditoria, que puede estar grande, conviene correrlo en un momento tranquilo. Si la tabla ya esta en la collation correcta, CONVERT TO no hace dano: la reescribe igual. Se suma af_obs_local por otro motivo: esa esta en utf8mb3_unicode_ci, no en utf8mb4. Comprobado que NO da 1267 al unirla con af_obs, porque utf8mb3 y utf8mb4 son charsets distintos y MySQL convierte de uno al otro en vez de rechazar la comparacion; el 1267 salta solo entre dos collations del mismo charset. Se normaliza igual porque utf8mb3 esta deprecado en MySQL 8 y porque esa conversion implicita en cada comparacion impide usar un indice del lado utf8mb3. Ninguna de sus columnas de texto tiene indice hoy, asi que convertirla no toca ninguna clave.",
+    "sql": [
+      "ALTER TABLE `auditoria` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `exchange_rates` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `modelos` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `modelos_codigos` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `obras` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `obras_facturas` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "ALTER TABLE `relacion_comprobantes` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+      "CREATE INDEX `idx_fnfact` ON `obras_facturas` (`fnfact`)",
+      "ALTER TABLE `af_obs_local` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
+    ]
+  },
+  {
+    "version": 49,
+    "descripcion": "Indice de busqueda en depo_st. La tabla guarda la existencia por deposito (cod + cod_depo -> cant) y es la que contesta cuanto stock hay de un articulo, pero no tenia ningun indice mas que la PK de _id y el idx_sync que puso la v45: toda busqueda por codigo hacia scan completo. Es el mismo caso que la v44 arreglo en stock y ped_d_local, y a depo_st se le paso. Importa ahora porque al marcar la tabla entera para resincronizar (_sync_estado=0) el sincronizador la empieza a recorrer mientras el ERP escribe, y ese es el caldo que dio los deadlocks del 28/09 y los 1526 del 29/09. El indice es compuesto (cod, cod_depo) en ese orden porque se busca siempre por articulo, con o sin deposito: asi sirve para las dos consultas. Agregar un indice en InnoDB es online, no bloquea lecturas ni escrituras. Si ya existe, el paso tira 1061 Duplicate key name y sigue de largo.",
+    "sql": [
+      "CREATE INDEX `idx_cod` ON `depo_st` (`cod`, `cod_depo`)"
+    ]
+  },
+  {
+    "version": 50,
+    "descripcion": "Crear la tabla plan (plan de cuentas) y los indices de contable que necesitan los informes contables del B2B. El plan de cuentas nunca se habia llevado a MySQL: vivia solo en el DBF, y sin el los informes muestran codigos de cuenta sin nombre ni forma de agrupar. La estructura es el superconjunto de las dos variantes que hay en los clientes: las bases de gestion solo tienen codigo/cuenta/analitica y dejan rubro, ajusta y sumaen en null; las del modulo contable traen las seis, y sumaen es la cuenta padre que permite armar la jerarquia sin deducirla del prefijo del codigo. Los indices de contable son para sumas y saldos: la v45 le puso idx_sync y no tiene ningun otro, asi que hoy cualquier informe por cuenta y periodo recorre la tabla entera",
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS `plan` (`codigo` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `cuenta` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `analitica` tinyint(1) DEFAULT NULL, `rubro` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `ajusta` tinyint(1) DEFAULT NULL, `sumaen` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `_id` bigint NOT NULL AUTO_INCREMENT, `_uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT (uuid()), `_creado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3), `_modificado_en` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3), `_sincronizado_en` datetime(3) DEFAULT NULL, `_sync_estado` tinyint(1) NOT NULL DEFAULT '0', `_sync_version` int NOT NULL DEFAULT '1', `_origen` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'MIGRADOR', `_eliminado` tinyint(1) NOT NULL DEFAULT '0', `_eliminado_en` datetime(3) DEFAULT NULL, `_hash` char(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `_api_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL, `update_at` datetime DEFAULT NULL, `syncro_at` datetime DEFAULT NULL, `deleted_at` datetime DEFAULT NULL, PRIMARY KEY (`_id`), KEY `idx_sync` (`_sync_estado`,`_eliminado`), KEY `idx_plan_codigo` (`codigo`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+      "CREATE INDEX `idx_contable_debe`  ON `contable` (`c_debe`, `fecha`)",
+      "CREATE INDEX `idx_contable_haber` ON `contable` (`c_haber`, `fecha`)"
+    ]
+  },
+  {
+    "version": 51,
+    "descripcion": "Alinear el campo bonif con el schema: en schema.json esta definido DEFAULT NULL en las seis tablas que lo tienen (afd, ped_d, ped_d_local, pre_d, rem_d, stock), pero en bases de clientes aparece como NOT NULL sin default. Reportado el 08/10/2026 por LOCALFONDO-VALE: el alta de articulos desde Excel fallaba con \"Field 'bonif' doesn't have a default value\" y se perdieron los ~45 articulos del lote. El INSERT del alta no nombra bonif porque ese campo no esta en el STOCK.DBF, asi que MySQL en modo estricto rechaza la fila entera. Es el mismo desajuste que ya habia obligado a agregarle al DBF-Migrador el auto-fix del error 1048 (_fix_column_nullable): aquel auto-fix solo corre durante una migracion, no cuando el ERP inserta, por eso hace falta esta migracion. MODIFY COLUMN es idempotente: si la columna ya es nullable no cambia nada. Si alguna tabla no existe en esa base, el paso tira 1146 y el runner sigue de largo.",
+    "sql": [
+      "ALTER TABLE `stock`       MODIFY COLUMN `bonif` decimal(5,2) NULL DEFAULT NULL",
+      "ALTER TABLE `afd`         MODIFY COLUMN `bonif` decimal(4,2) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_d`       MODIFY COLUMN `bonif` decimal(4,2) NULL DEFAULT NULL",
+      "ALTER TABLE `ped_d_local` MODIFY COLUMN `bonif` decimal(4,2) NULL DEFAULT NULL",
+      "ALTER TABLE `pre_d`       MODIFY COLUMN `bonif` decimal(4,2) NULL DEFAULT NULL",
+      "ALTER TABLE `rem_d`       MODIFY COLUMN `bonif` decimal(5,2) NULL DEFAULT NULL"
+    ]
+  },
+  {
+    "version": 52,
+    "descripcion": "Agregar stock.por_impint: alicuota NOMINAL de impuestos internos del articulo. Se guarda la nominal y el calculo convierte a efectiva con efectiva = nominal / (1 - nominal/100); 9,50 nominal da 10,497238 efectiva. Criterio verificado contra el ejemplo de 1.314.972,38: neto 1.000.000,00 + internos 104.972,38 + IVA 210.000,00, con los internos FUERA de la base del IVA. El nombre lleva el prefijo POR_ y no IMPU_ porque en stock IMPU_ ya es de las imputaciones contables (impu_c / impu_v son varchar(8), codigos de cuenta) y TASA_ tampoco sirve porque tasa_ib es un codigo, no una tasa; los porcentajes de esta tabla son por_prov y por_lista1..8. DEFAULT 0.00 y nullable, no NOT NULL: un campo numerico nuevo en el DBF nace en 0 y no puede ser null, asi que el default 0.00 deja las dos puntas identicas y no ensucia la conciliacion; y al ser nullable, un INSERT que no nombre la columna no puede tirar 1048 como paso con bonif en la v51. Equivalente en el DBF: bloque 111887 de actualizatablas.prg (ExisteCampo STOCK POR_IMPINT N 5 2). Si la columna ya existe el paso tira 1060 y el runner sigue de largo.",
+    "sql": [
+      "ALTER TABLE `stock` ADD COLUMN `por_impint` decimal(5,2) DEFAULT 0.00"
+    ]
+  },
+  {
+    "version": 53,
+    "descripcion": "Indice compuesto en obras_facturas (codfact, pventa, numero): es por donde se busca realmente. La v48 ya habia puesto idx_fnfact, pero sobre fnfact, que NO se usa en ninguna consulta: ObraDeFactura() y el INSERT de ObraFacturaGrabar() filtran por codfact/pventa/numero, asi que cada busqueda de obra era un scan completo de la tabla, y corre en CADA impresion de factura, remito, pedido y presupuesto. Indice comun y no unique a proposito: un unique seria mejor -ObraFacturaGrabar hace un INSERT pelado sin verificar, asi que se pueden duplicar filas- pero si algun cliente YA tiene duplicados el unique falla y ese cliente se queda sin indice. Primero hay que medir los duplicados con un GROUP BY codfact,pventa,numero HAVING COUNT(*)>1 y recien entonces decidir si se limpia y se pone unique en una migracion posterior. Si el indice ya existe el paso tira 1061 y el runner sigue de largo.",
+    "sql": [
+      "CREATE INDEX `idx_obras_fact` ON `obras_facturas` (`codfact`, `pventa`, `numero`)"
+    ]
+  }
+]

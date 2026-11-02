@@ -1,0 +1,20 @@
+# Este repo es lo que CONSULTAN LOS CLIENTES: solo tiene que tener los
+# archivos que el actualizador descarga. Todo lo demas que quede en la
+# carpeta (salidas de InstallShield, respaldos, rars viejos) se ignora.
+#
+# El 08/10/2026 un "git add -A" metio 4,1 MB de Express/ mas dos .rar de
+# 2023 en un solo commit. Por eso esta lista.
+
+# Salida de InstallShield Express (incluye su propio setup.exe de 4 MB)
+Express/
+
+# Rars viejos que quedaron en la carpeta y no los descarga nadie
+actualizador.rar
+bkp_wsgc1.rar
+
+# Respaldos y temporales
+*.bak
+*.bak_*
+*.tmp
+*.log
+~$*
